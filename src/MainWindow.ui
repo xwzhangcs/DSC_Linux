@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1006</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1000</width>
+    <height>800</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Simple Cities</string>
+  </property>
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1006</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionLoadZone"/>
+    <addaction name="actionOpenTerrain"/>
+    <addaction name="actionSaveTerrain"/>
+    <addaction name="separator"/>
+    <addaction name="actionLoadRoads"/>
+    <addaction name="actionLoadOSMRoads"/>
+    <addaction name="actionSaveRoads"/>
+    <addaction name="separator"/>
+    <addaction name="actionLoadParcels"/>
+    <addaction name="actionSaveParcels"/>
+    <addaction name="separator"/>
+    <addaction name="actionLoadBuildings"/>
+    <addaction name="actionSaveBuildings"/>
+    <addaction name="separator"/>
+    <addaction name="actionClear"/>
+    <addaction name="separator"/>
+    <addaction name="actionSaveImage"/>
+    <addaction name="actionSaveImageHD"/>
+    <addaction name="separator"/>
+    <addaction name="actionLoadCamera"/>
+    <addaction name="actionLoadCameraFre"/>
+    <addaction name="actionSaveCamera"/>
+    <addaction name="actionResetCamera"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuWindow">
+    <property name="title">
+     <string>Window</string>
+    </property>
+    <addaction name="actionControlWidget"/>
+   </widget>
+   <widget class="QMenu" name="menuPM">
+    <property name="title">
+     <string>PM</string>
+    </property>
+    <addaction name="actionGenerateRoads"/>
+    <addaction name="actionGenerateBlocks"/>
+    <addaction name="actionGenerateParcels"/>
+    <addaction name="actionGenerateBuildings"/>
+    <addaction name="actionGenerateVegetation"/>
+    <addaction name="actionGenerateAll"/>
+    <addaction name="separator"/>
+    <addaction name="actionGenerateScenarios"/>
+   </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>View</string>
+    </property>
+    <addaction name="actionView2D"/>
+    <addaction name="actionView3D"/>
+    <addaction name="separator"/>
+    <addaction name="actionShowWater"/>
+    <addaction name="actionSeaLevel"/>
+   </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <addaction name="actionGenerate_Blocks"/>
+    <addaction name="actionImage_OBB"/>
+    <addaction name="actionParcelClassifer"/>
+    <addaction name="actionCallPython"/>
+    <addaction name="actionNNAnalysis"/>
+    <addaction name="actionTestNN"/>
+    <addaction name="actionNN"/>
+    <addaction name="actionParameterControl"/>
+    <addaction name="actionEstimateFromNN"/>
+    <addaction name="actionChange_Fov"/>
+    <addaction name="actionTestSVF"/>
+    <addaction name="actionComputeSVF"/>
+    <addaction name="actionTest_QPainter"/>
+    <addaction name="actionGenerate_Height_Map"/>
+   </widget>
+   <widget class="QMenu" name="menuSatelliate_Image">
+    <property name="title">
+     <string>Satelliate Image</string>
+    </property>
+    <addaction name="actionLoadGeoInfo"/>
+    <addaction name="actionLoadHeightTiff"/>
+    <addaction name="actionLoadPopulationTiff"/>
+    <addaction name="actionLoadSegmentedImage"/>
+    <addaction name="actionLoadParcelImage"/>
+    <addaction name="actionLoadWholeImage"/>
+    <addaction name="actionLoadGroundTruth"/>
+    <addaction name="actionSateLoadOSMRoads"/>
+    <addaction name="actionSateLayout"/>
+   </widget>
+   <widget class="QMenu" name="menuDemo">
+    <property name="title">
+     <string>Demo</string>
+    </property>
+    <addaction name="actionLoadROI"/>
+    <addaction name="actionGenerate_ROI_Layout"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuPM"/>
+   <addaction name="menuWindow"/>
+   <addaction name="menuSatelliate_Image"/>
+   <addaction name="menuTools"/>
+   <addaction name="menuView"/>
+   <addaction name="menuDemo"/>
+  </widget>
+  <widget class="QToolBar" name="fileToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionNewTerrain">
+   <property name="text">
+    <string>New Terrain</string>
+   </property>
+   <property name="shortcut">
+    <string/>
+   </property>
+  </action>
+  <action name="actionOpenTerrain">
+   <property name="text">
+    <string>Open Terrain</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionControlWidget">
+   <property name="text">
+    <string>Control Widget</string>
+   </property>
+  </action>
+  <action name="actionSaveTerrain">
+   <property name="text">
+    <string>Save Terrain</string>
+   </property>
+   <property name="shortcut">
+    <string/>
+   </property>
+  </action>
+  <action name="actionSaveRoads">
+   <property name="text">
+    <string>Save Roads</string>
+   </property>
+  </action>
+  <action name="actionPropertyWidget">
+   <property name="text">
+    <string>Property Widget</string>
+   </property>
+  </action>
+  <action name="actionLoadRoads">
+   <property name="text">
+    <string>Load Roads</string>
+   </property>
+  </action>
+  <action name="actionClear">
+   <property name="text">
+    <string>Clear</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionSaveImage">
+   <property name="text">
+    <string>Save Image</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+L</string>
+   </property>
+  </action>
+  <action name="actionLoadCamera">
+   <property name="text">
+    <string>Load Camera</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+1</string>
+   </property>
+  </action>
+  <action name="actionSaveCamera">
+   <property name="text">
+    <string>Save Camera</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+2</string>
+   </property>
+  </action>
+  <action name="actionSaveImageHD">
+   <property name="text">
+    <string>Save Image HD</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionResetCamera">
+   <property name="text">
+    <string>Reset Camera</string>
+   </property>
+  </action>
+  <action name="actionGenerateBlocks">
+   <property name="text">
+    <string>Generate Blocks</string>
+   </property>
+  </action>
+  <action name="actionGenerateParcels">
+   <property name="text">
+    <string>Generate Parcels</string>
+   </property>
+  </action>
+  <action name="actionGenerateBuildings">
+   <property name="text">
+    <string>Generate Buildings</string>
+   </property>
+  </action>
+  <action name="actionGenerateVegetation">
+   <property name="text">
+    <string>Generate Vegetation</string>
+   </property>
+  </action>
+  <action name="actionGenerateAll">
+   <property name="text">
+    <string>Generate All</string>
+   </property>
+  </action>
+  <action name="actionLoadParcels">
+   <property name="text">
+    <string>Load Parcels</string>
+   </property>
+  </action>
+  <action name="actionLoadBuildings">
+   <property name="text">
+    <string>Load Buildings</string>
+   </property>
+  </action>
+  <action name="actionGenerateRoads">
+   <property name="text">
+    <string>Generate Roads</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="actionLoadZone">
+   <property name="text">
+    <string>Load Zone</string>
+   </property>
+  </action>
+  <action name="actionSaveParcels">
+   <property name="text">
+    <string>Save Parcels</string>
+   </property>
+  </action>
+  <action name="actionSaveBuildings">
+   <property name="text">
+    <string>Save Buildings</string>
+   </property>
+  </action>
+  <action name="actionGenerateScenarios">
+   <property name="text">
+    <string>Generate Scenarios</string>
+   </property>
+  </action>
+  <action name="actionView2D">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>2D</string>
+   </property>
+  </action>
+  <action name="actionView3D">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>3D</string>
+   </property>
+  </action>
+  <action name="actionSeaLevel">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Sea Level</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionShowWater">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Show Water</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionLoadOSMRoads">
+   <property name="text">
+    <string>Load OSM Roads</string>
+   </property>
+  </action>
+  <action name="actionGenerate_Blocks">
+   <property name="text">
+    <string>Generate Blocks</string>
+   </property>
+  </action>
+  <action name="actionImage_OBB">
+   <property name="text">
+    <string>Image OBB</string>
+   </property>
+  </action>
+  <action name="actionParcelClassifer">
+   <property name="text">
+    <string>Parcel Classifer</string>
+   </property>
+  </action>
+  <action name="actionSateLoadOSMRoads">
+   <property name="text">
+    <string>Load OSM Roads</string>
+   </property>
+  </action>
+  <action name="actionSateGetBlocks">
+   <property name="text">
+    <string>Get Blocks</string>
+   </property>
+  </action>
+  <action name="actionSateLayout">
+   <property name="text">
+    <string>Generate Urban Layout</string>
+   </property>
+  </action>
+  <action name="actionSateGetBuildings">
+   <property name="text">
+    <string>Get Buildings</string>
+   </property>
+  </action>
+  <action name="actionLoadSegmentedImage">
+   <property name="text">
+    <string>Load Segmented Image</string>
+   </property>
+  </action>
+  <action name="actionLoadGeoInfo">
+   <property name="text">
+    <string>Load GeoTiff Image</string>
+   </property>
+  </action>
+  <action name="actionLoadGroundTruth">
+   <property name="text">
+    <string>Load Ground Truth</string>
+   </property>
+  </action>
+  <action name="actionLoadParcelImage">
+   <property name="text">
+    <string>Load Parcel Image</string>
+   </property>
+  </action>
+  <action name="actionLoadHeightTiff">
+   <property name="text">
+    <string>Load Height Tiff</string>
+   </property>
+  </action>
+  <action name="actionLoadPopulationTiff">
+   <property name="text">
+    <string>Load Population Tiff</string>
+   </property>
+  </action>
+  <action name="actionLoadWholeImage">
+   <property name="text">
+    <string>Load Whole Image</string>
+   </property>
+  </action>
+  <action name="actionLoadROI">
+   <property name="text">
+    <string>Load Road Network</string>
+   </property>
+  </action>
+  <action name="actionLoad_ROI_Image">
+   <property name="text">
+    <string>Load ROI Image</string>
+   </property>
+  </action>
+  <action name="actionGenerate_ROI_Layout">
+   <property name="text">
+    <string>Generate Urban Layout</string>
+   </property>
+  </action>
+  <action name="actionCallPython">
+   <property name="text">
+    <string>Call Python</string>
+   </property>
+  </action>
+  <action name="actionNNAnalysis">
+   <property name="text">
+    <string>NN Analysis</string>
+   </property>
+  </action>
+  <action name="actionNN">
+   <property name="text">
+    <string>TestOneNN</string>
+   </property>
+  </action>
+  <action name="actionTestNN">
+   <property name="text">
+    <string>FilterBlock</string>
+   </property>
+  </action>
+  <action name="actionParameterControl">
+   <property name="text">
+    <string>ParameterControl</string>
+   </property>
+  </action>
+  <action name="actionEstimateFromNN">
+   <property name="text">
+    <string>EstimateFromNN</string>
+   </property>
+  </action>
+  <action name="actionLoadCameraFre">
+   <property name="text">
+    <string>Load Camera Frequency</string>
+   </property>
+  </action>
+  <action name="actionChange_Fov">
+   <property name="text">
+    <string>Change Fov</string>
+   </property>
+  </action>
+  <action name="actionComputeSVF">
+   <property name="text">
+    <string>Compute SVF</string>
+   </property>
+  </action>
+  <action name="actionTestSVF">
+   <property name="text">
+    <string>Test SVF</string>
+   </property>
+  </action>
+  <action name="actionTest_QPainter">
+   <property name="text">
+    <string>Generate SVF Map</string>
+   </property>
+  </action>
+  <action name="actionGenerate_Height_Map">
+   <property name="text">
+    <string>Generate Height Map</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="MainWindow.qrc"/>
+ </resources>
+ <connections/>
+</ui>
