@@ -32,6 +32,7 @@ add_definitions(-DGLM_FORCE_CTOR_INIT)
 
 # Get sources
 file(GLOB SOURCES src/*.cpp)
+file(GLOB SOURCES src/nvModel/*.cpp)
 file(GLOB QRC src/*.qrc)
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${QRC})
