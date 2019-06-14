@@ -1,6 +1,6 @@
 #pragma once
 
-#include "glew.h"
+#include "GL/glew.h"
 #include "qstring.h"
 #include "qvector3d.h"
 #include <QColor>

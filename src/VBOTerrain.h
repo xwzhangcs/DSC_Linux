@@ -1,6 +1,6 @@
 #pragma once
 
-#include "glew.h"
+#include "GL/glew.h"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 #include <glm/glm.hpp>

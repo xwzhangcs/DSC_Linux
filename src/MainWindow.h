@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "glew.h"
+#include "GL/glew.h"
 #include <QtWidgets/QMainWindow>
 #include "ui_MainWindow.h"
 #include "ControlWidget.h"
