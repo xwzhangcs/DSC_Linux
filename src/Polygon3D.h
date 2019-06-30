@@ -4,7 +4,7 @@
 ************************************************************************************************/
 #pragma once
 
-#include "glew.h"
+#include "src/glew/include/GL/glew.h"
 #include "common.h"
 #include "BBox.h"
 #include <vector>

@@ -1,5 +1,5 @@
 ﻿#include "PMRoadGenerator.h"
-#include <QTest>
+#include <QtTest/QtTest>
 #include <boost/graph/planar_face_traversal.hpp>
 #include <boost/graph/boyer_myrvold_planar_test.hpp>
 #include "global.h"

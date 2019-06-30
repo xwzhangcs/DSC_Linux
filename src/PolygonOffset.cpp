@@ -2,7 +2,8 @@
 #include <algorithm>
 
 namespace polyoffset {
-	const double M_PI = 3.141592653589793238462643383279;
+	//Liu commented it on 2019/06/27
+	//const double M_PI = 3.141592653589793238462643383279;
 
 	bool sort_pred1(const std::pair<double, std::pair<int, glm::dvec2>>& left, const std::pair<double, std::pair<int, glm::dvec2>>& right) {
 		return left.first < right.first;

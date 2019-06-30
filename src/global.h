@@ -12,7 +12,7 @@
 #pragma once
 
 #include <QHash>
-#include <Qvariant>
+#include <qvariant.h>
 #include <QVector3D>
 
 class G{

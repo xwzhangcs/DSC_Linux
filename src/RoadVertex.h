@@ -8,8 +8,10 @@
 #include <boost/shared_ptr.hpp>
 
 class RoadVertex {
+
+//Liu remove "static" before enum 2019/06/24
 public:
-	static enum { EIGEN_TYPE_NONE = 0, EIGEN_TYPE_MAJOR = 1, EIGEN_TYPE_MINOR = 2, EIGEN_TYPE_BOTH = 3 };
+	enum { EIGEN_TYPE_NONE = 0, EIGEN_TYPE_MAJOR = 1, EIGEN_TYPE_MINOR = 2, EIGEN_TYPE_BOTH = 3 };
 
 public:
 	QVector2D pt;

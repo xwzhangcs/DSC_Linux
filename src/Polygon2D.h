@@ -20,7 +20,11 @@ public:
 	float area() const;
 	QVector2D centroid() const;
 	bool contains(const QVector2D &pt) const;
-	bool Polygon2D::contains(const Polygon2D &polygon) const;
+
+	//error: extra qualification ‘Polygon2D::’ on member ‘contains’ [-fpermissive]
+	//Liu remove ‘Polygon2D::’ on 2019/06/24
+	bool contains(const Polygon2D &polygon) const;
+
 	Polygon2D convexHull() const;
 	BBox envelope() const;
 	bool intersects(const QVector2D& a, const QVector2D& b, QVector2D& intPt) const;

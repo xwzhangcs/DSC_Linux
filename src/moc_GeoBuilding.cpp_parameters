@@ -1,0 +1,11 @@
+-I/usr/include/gdal
+-I/usr/include
+-I/usr/include/python3.6m
+-I/usr/local/cuda/include
+-I/home/liuhe95/Documents/demo/DSC-master
+-I/home/liuhe95/Documents/demo/DSC-master
+-DGLM_ENABLE_EXPERIMENTAL
+-DGLM_FORCE_CTOR_INIT
+-o
+/home/liuhe95/Documents/demo/DSC-master/src/moc_GeoBuilding.cpp
+/home/liuhe95/Documents/demo/DSC-master/src/GeoBuilding.h

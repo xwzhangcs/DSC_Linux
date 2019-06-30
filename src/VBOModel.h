@@ -4,7 +4,7 @@
 #include "qmatrix4x4.h"
 #include <vector>
 
-#include "nvModel\nvModel.h"
+#include <src/nvModel/nvModel.h>
 #include "VBOUtil.h"
 
 

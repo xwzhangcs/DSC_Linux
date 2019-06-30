@@ -3,7 +3,6 @@
 #undef ERROR
 #undef STRICT
 
-#include <caffe/caffe.hpp>
 #include <opencv2/opencv.hpp>
 #include <caffe/caffe.hpp>
 #include <opencv2/core/core.hpp>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "glew.h"
+#include "src/glew/include/GL/glew.h"
 
 #include <QtWidgets/QDockWidget>
 #include "ui_TerrainSizeInputDialog.h"

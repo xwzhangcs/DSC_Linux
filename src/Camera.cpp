@@ -1,5 +1,8 @@
 ﻿#include "Camera.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include "src/glew/include/GL/glew.h"
+#include <glm/vec3.hpp>
+#include <QVector2D>
 
 #ifndef M_PI
 #define M_PI	3.1415926535
@@ -9,7 +12,10 @@ Camera::Camera() {
 	xrot = 40.0f;
 	yrot = 0.0;
 	zrot = 0.0f;
-	pos = glm::vec3(0, 15, 80);
+//Liu changed this initialization function on 2019/06/24
+	rot = QVector3D(xrot, yrot, zrot);
+	//pos = glm::vec3(0, 15, 80);
+	pos = QVector3D(0, 15, 80);
 	fovy = 45.0f;
 }
 
@@ -17,32 +23,34 @@ Camera::Camera() {
  * Call this function when the mouse button is pressed.
  */
 void Camera::mousePress(int mouse_x, int mouse_y) {
-	mouse_pos = glm::vec2(mouse_x, mouse_y);
+	//Liu changed 'glm::vec2' to 'qvector2d' on 2019/06/25
+	mouse_pos = QVector2D(mouse_x, mouse_y);
 }
 
 /**
  * Call this function whenever the mouse moves while rotating the model.
  */
 void Camera::rotate(int mouse_x, int mouse_y) {
-	xrot += mouse_y - mouse_pos.y;
-	yrot += mouse_x - mouse_pos.x;
+	xrot += mouse_y - mouse_pos.y();
+	yrot += mouse_x - mouse_pos.x();
 	updateMVPMatrix();
-
-	mouse_pos = glm::vec2(mouse_x, mouse_y);
+	//Liu changed 'glm::vec2' to 'qvector2d' on 2019/06/25
+	mouse_pos = QVector2D(mouse_x, mouse_y);
 }
 
 /**
  * Call this function whenever the mouse moves while zooming.
  */
 /*void Camera::zoom(int mouse_x, int mouse_y) {
-	pos.z += (mouse_pos.y - mouse_y) * 0.5f;
+	pos.z() += (mouse_pos.y - mouse_y) * 0.5f;
 	updateMVPMatrix();
 
 	mouse_pos = glm::vec2(mouse_x, mouse_y);
 }*/
 
 void Camera::zoom(float delta) {
-	pos.z -= delta * 0.1f;
+	
+	pos.setZ( pos.z() - delta * 0.1f );
 	updateMVPMatrix();
 }
 
@@ -50,11 +58,12 @@ void Camera::zoom(float delta) {
  * Call this function whenever the mouse moves while moving the model.
  */
 void Camera::move(int mouse_x, int mouse_y) {
-	pos.x -= (mouse_x - mouse_pos.x) * 0.1;
-	pos.y += (mouse_y - mouse_pos.y) * 0.1;
+	pos.setX( pos.x() - (mouse_x - mouse_pos.x()) * 0.1 );
+	pos.setY( pos.y() - (mouse_y - mouse_pos.y()) * 0.1 );
 	updateMVPMatrix();
 
-	mouse_pos = glm::vec2(mouse_x, mouse_y);
+	//Liu changed 'glm::vec2' to 'qvector2d' on 2019/06/25
+	mouse_pos = QVector2D(mouse_x, mouse_y);
 }
 
 /**
@@ -69,7 +78,7 @@ void Camera::updatePMatrix(int width,int height) {
 	// projection行列
 	// ただし、mat4はcolumn majorなので、転置した感じで初期構築する。
 	// つまり、下記の一行目は、mat4の一列目に格納されるのだ。
-	pMatrix = glm::mat4(
+	glm::mat4 pMatrix = glm::mat4(
 		 f/aspect,	0,								0,									0,
 				0,	f,								0,						 			0,
 			    0,	0,		(zfar+znear)/(znear-zfar),		                           -1,
@@ -83,11 +92,13 @@ void Camera::updatePMatrix(int width,int height) {
  */
 void Camera::updateMVPMatrix() {
 	// create model view matrix
-	mvMatrix = glm::mat4();
-	mvMatrix = glm::translate(mvMatrix, -pos);
-	mvMatrix = glm::rotate(mvMatrix, xrot * (float)M_PI / 180.0f, glm::vec3(1, 0, 0));
-	mvMatrix = glm::rotate(mvMatrix, yrot * (float)M_PI / 180.0f, glm::vec3(0, 1, 0));
-	mvMatrix = glm::rotate(mvMatrix, zrot * (float)M_PI / 180.0f, glm::vec3(0, 0, 1));
+	
+	//This part was modified by Liu on 2019/06/25	
+	mvMatrix = QMatrix4x4();
+	mvMatrix.translate(-pos.x(), -pos.y(),-pos.z() );
+	mvMatrix.rotate(xrot * (float)M_PI / 180.0f, QVector3D(1, 0, 0));
+	mvMatrix.rotate(yrot * (float)M_PI / 180.0f, QVector3D(0, 1, 0));
+	mvMatrix.rotate(zrot * (float)M_PI / 180.0f, QVector3D(0, 0, 1));
 
 	// create model view projection matrix
 	mvpMatrix = pMatrix * mvMatrix;

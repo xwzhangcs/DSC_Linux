@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include <Qvector2D>
+#include <qvector2d.h>
 #include <QHash>
 #include <QVariant>
 #include <QColor>
@@ -9,10 +9,13 @@
 #include "Polyline3D.h"
 #include "Polyline2D.h"
 
+
+//Liu remove 2 "static" before 2 "enum" declerations 2019/06/24
+  
 class RoadEdge {
 public:
-	static enum { TYPE_OTHERS = 0, TYPE_STREET = 1, TYPE_AVENUE = 2, TYPE_SECONDARY = 3, TYPE_MOTOR = 4 };
-	static enum { EIGEN_TYPE_NONE = 0, EIGEN_TYPE_MAJOR = 1, EIGEN_TYPE_MINOR = 2, EIGEN_TYPE_BOTH = 3 };
+	enum { TYPE_OTHERS = 0, TYPE_STREET = 1, TYPE_AVENUE = 2, TYPE_SECONDARY = 3, TYPE_MOTOR = 4 };
+	enum { EIGEN_TYPE_NONE = 0, EIGEN_TYPE_MAJOR = 1, EIGEN_TYPE_MINOR = 2, EIGEN_TYPE_BOTH = 3 };
 
 
 public:

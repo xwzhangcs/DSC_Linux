@@ -1,6 +1,11 @@
-﻿#include "MainWindow.h"
+#include <Python.h>
+#undef B0
 #include <QFileDialog>
 #include <QShortcut>
+#include <QInputDialog>
+//Liu modified the order of include file on 2019/06/26
+
+#include "MainWindow.h"
 #include "TerrainSizeInputDialog.h"
 #include "ScenarioGenerationDialog.h"
 #include "GenerateBlocksDlg.h"
@@ -11,8 +16,7 @@
 #include "Util.h"
 #include "caffe_wrapper.h"
 #include "Regression.h"
-#include <QInputDialog>
-#include <Python.h>
+
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 	std::cout << "Going to MainWindow" << std::endl;
@@ -203,8 +207,8 @@ void MainWindow::onDemoLoadROI(){
 	//int terrainSize_x = 2100;
 	//int terrainSize_y = 1200;
 	// for chicago
-	int terrainSize_x = 2500;
-	int terrainSize_y = 2500;
+	//int terrainSize_x = 2500;
+	//int terrainSize_y = 2500;
 	// for new orleans
 	//int terrainSize_x = 2500;
 	//int terrainSize_y = 2500;
@@ -218,8 +222,8 @@ void MainWindow::onDemoLoadROI(){
 	//int terrainSize_x = 1000;
 	//int terrainSize_y = 1000;
 	// small chicago
-	//int terrainSize_x = 500;
-	//int terrainSize_y = 500;
+	int terrainSize_x = 500;
+	int terrainSize_y = 500;
 	int resize_factor = 4;
 	// Load the directory for ROI
 	QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"), "", QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
@@ -229,19 +233,21 @@ void MainWindow::onDemoLoadROI(){
 	// Load OSM road
 	glWidget->vboRenderManager.changeTerrainDimensions(glm::vec2(terrainSize_x, terrainSize_y));
 	//QString filename = dir + "/Streets.osm";
-	QString filename = dir + "/Whole.osm";
+	QString filename = dir + "/whole.osm";
 	if (!QFile(filename).exists()) {
 		return;
 	}
+std::cout << "OSM 2!!" << std::endl;
 	urbanGeometry->clear();
 	urbanGeometry->loadOSMRoads(filename.toUtf8().constData());
+std::cout << "OSM 3!!" << std::endl;
 	glWidget->shadow.makeShadowMap(glWidget);
 	glWidget->updateGL();
 	std::cout << "Finish loading OSM road!!" << std::endl;
 
 	// Load autoLabeled image
-	//QString filename_tif = dir + "/Truth.tif";
-	QString filename_tif = dir + "/labeled.tif";
+	QString filename_tif = dir + "/Truth.tif";
+	//QString filename_tif = dir + "/labeled.tif";
 	if (!QFile(filename_tif).exists()) {
 		return;
 	}
@@ -253,8 +259,8 @@ void MainWindow::onDemoLoadROI(){
 	std::cout << "Finish loading Geo Info for the segmented image!!" << std::endl;
 
 	// load the labeled image
-	//QString filename_labeled = dir + "/Truth.png";
-	QString filename_labeled = dir + "/labeled.png";
+	QString filename_labeled = dir + "/Truth.png";
+	//QString filename_labeled = dir + "/labeled.png";
 	if (!QFile(filename_labeled).exists())  return;
 	G::global()["segmented_image"] = filename_labeled;
 	std::cout << "Finish loading labeled image!!" << std::endl;
@@ -2100,7 +2106,7 @@ void MainWindow::onCallPython(){
 	PyObject *pName, *pModule, *pDict, *pFunc;
 	PyObject *pArgs, *pValue;
 	Py_Initialize();
-	pName = PyString_FromString("ComputeCityStats");
+	pName = PyBytes_FromString("ComputeCityStats");
 
 	pModule = PyImport_Import(pName);
 	Py_DECREF(pName);
@@ -2111,14 +2117,14 @@ void MainWindow::onCallPython(){
 
 		if (pFunc && PyCallable_Check(pFunc)) {
 			pArgs = PyTuple_New(2);
-			pValue = PyString_FromString("../x64/Release/Chicago");
+			pValue = PyBytes_FromString("../x64/Release/Chicago");
 			PyTuple_SetItem(pArgs, 0, pValue);
-			pValue = PyInt_FromLong(0);
+			pValue = PyLong_FromLong(0);
 			PyTuple_SetItem(pArgs, 1, pValue);
 			pValue = PyObject_CallObject(pFunc, pArgs);
 			Py_DECREF(pArgs);
 			if (pValue != NULL) {
-				printf("Result of call: %s\n", PyString_AsString(pValue));
+				printf("Result of call: %s\n", PyBytes_AsString(pValue));
 				Py_DECREF(pValue);
 			}
 			else {
@@ -2340,21 +2346,22 @@ void MainWindow::onShowControlWidget() {
 	addDockWidget(Qt::LeftDockWidgetArea, controlWidget);
 }
 
+//commented by Liu on 2019/06/27
 std::vector<std::string> MainWindow::get_all_files_names_within_folder(std::string folder)
 {
-	std::vector<std::string> names;
-	std::string search_path = folder + "/*.*";
-	WIN32_FIND_DATA fd;
-	HANDLE hFind = ::FindFirstFile(search_path.c_str(), &fd);
-	if (hFind != INVALID_HANDLE_VALUE) {
-		do {
-			// read all (real) files in current folder
-			// , delete '!' read other 2 default folder . and ..
-			if (!(fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
-				names.push_back(fd.cFileName);
-			}
-		} while (::FindNextFile(hFind, &fd));
-		::FindClose(hFind);
-	}
-	return names;
+//	std::vector<std::string> names;
+//	std::string search_path = folder + "/*.*";
+//	WIN32_FIND_DATA fd;
+//	HANDLE hFind = ::FindFirstFile(search_path.c_str(), &fd);
+//	if (hFind != INVALID_HANDLE_VALUE) {
+//		do {
+//			// read all (real) files in current folder
+//			// , delete '!' read other 2 default folder . and ..
+//			if (!(fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
+//				names.push_back(fd.cFileName);
+//			}
+//		} while (::FindNextFile(hFind, &fd));
+//		::FindClose(hFind);
+//	}
+//	return names;
 }

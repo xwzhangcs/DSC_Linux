@@ -18,7 +18,7 @@
 #include <vector>
 #include <assert.h>
 
-#include <..\..\glew\include\GL\glew.h>
+#include <src/glew/include/GL/glew.h>
 #include "nvMath.h"
 
 namespace nv {

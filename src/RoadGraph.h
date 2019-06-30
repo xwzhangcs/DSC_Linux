@@ -1,6 +1,6 @@
 #pragma once
 
-#include "glew.h"
+#include "src/glew/include/GL/glew.h"
 #include "common.h"
 #include <stdio.h>
 #include "RoadVertex.h"

@@ -1,27 +1,45 @@
 #pragma once
 
-#include "glew.h"
+#include "src/glew/include/GL/glew.h"
 #include "qvector4d.h"
 #include "qmatrix4x4.h"
 #include "global.h"
 #include <fstream>
 #include <iostream>
+#include <glm/vec3.hpp>
+#include <QVector2D>
+
+//Liu added on 2019/06/24
+#include <cmath>
 
 class Camera {
 public:
 	QVector3D rot;
 	QVector3D pos;
 	QVector3D lookAt;
-	float fovy;
+	float fovy=60.0f;//Liu added fovy initialization as 60.0f default on 2019/06/24
+	float xrot, yrot, zrot;//Liu added this line based on camera(){} in camera.cpp
+	QVector2D mouse_pos;
 
 	QMatrix4x4 mvMatrix;
 	QMatrix4x4 mvpMatrix;
 	QMatrix4x4 pMatrix;
 	QMatrix3x3 normalMatrix;
+	
 
-	Camera() {
-		fovy = 60.0f;
-	}
+	//error: redefinition of ‘Camera::Camera()’ in Camera.cpp
+	//Liu removed Camera() {} with 'fovy' initialization on 2019/06/24
+	Camera();
+
+	//Liu added 6 member functions from camera.cpp file on 2019/06/24
+	void mousePress(int mouse_x, int mouse_y);
+	void rotate(int mouse_x, int mouse_y);
+	void zoom(float delta);
+	void move(int mouse_x, int mouse_y);
+	void updatePMatrix(int width,int height);
+	void updateMVPMatrix();
+	
+
 
 	QVector4D getCamPos() {
 		QVector4D eye(0.0f, 0.0f, 0.0f, 1.0f);
